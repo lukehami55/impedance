@@ -11,4 +11,7 @@ Upload the firmata.py file onto the Raspberry Pi along with the installation of 
 
 # Running
 Invoke firmata.py script on the Raspberry Pi using the following:
-> python firmata.py
+```
+python firmata.py
+```
+Lead will be constantly monitored around 3,000 times a second by analog pins and will stop if a break occurs
