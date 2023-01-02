@@ -78,4 +78,4 @@ def alert(break1, break2, break3):
 
 
 if __name__ == '__main__':
-        init()
+    init()
