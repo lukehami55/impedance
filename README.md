@@ -8,3 +8,7 @@ Variables in diagram are associated with variables found in firmata.py script. D
 
 # Getting Started
 Upload the firmata.py file onto the Raspberry Pi along with the installation of the [pyFirmata](https://pypi.org/project/pyFirmata/)
+
+# Running
+Invoke firmata.py script on the Raspberry Pi using the following:
+> python firmata.py
