@@ -20,39 +20,46 @@ def init():
     
     
 """
-read_a gets first impedence reading
-read_a always goes high no matter the location
+read1 gets first impedence reading
+read1 always goes high no matter the location
 """
 def read(board):
     while True:
-        read_a = board.analog[0].read() 
-        if read_a > 0.2: #
+        read1 = board.analog[0].read() 
+        if read1 > 0.2: #
             broke(board) #analyze location of break
             break
         else:
             with open("output.txt", "a") as output:
-                output.write(str(datetime.now())+","+str(read_a)+","+str(read_b)+","+str(read_c)+"\n")
+                output.write(str(datetime.now())+","+str(read1)+","+str(read1)+","+str(read1)+"\n")
 
                 
 """
-seperate function and large range used as it takes time for read_b and read_c to populate
+reference "leadFlow.png" diagram
+seperate function and large range used as it takes time for read2 and read3 to populate
+break1 = faulty bend1
+break2 = faulty bend2
+break3 = faulty bend3
+
 logic flow:
-read_a is known to be high
-if no additional high value in range interval, break occured at break1
-if read_b is high in interval, turns off break1 possibility and adds break2 possibility
-if read_c is high, break can only occur at break3 ("only" is reason for "break" statement), turns off break1 and break2 possibility
+read1 is known to be high
+if no additional high value in range interval, break1 is true
+if read2 is high in interval, turns off break1 possibility and adds break2 possibility
+if read3 is high, break can only occur at break3 ("only" is reason for "break" statement), turns off break1 and break2 possibility
 """
 def broke(board):
     break1 = True
     break2 = False
     break3 = False
     for i in range(100000):
-        if board.analog[2].read() > 0.2:
+        read2 = board.analog[1].read()
+        read3 = board.analog[2].read()
+        if read3 > 0.2:
             break1 = False
             break2 = False
             break3 = True
             break
-        if board.analog[1].read() > 0.2:
+        if read2 > 0.2:
             break1 = False
             break2 = True
         alert(break1, break2, break3)
