@@ -63,7 +63,7 @@ def broke(board):
         if read2 > 0.2:
             break1 = False
             break2 = True
-        alert(break1, break2, break3)
+    alert(break1, break2, break3)
 
         
 """
