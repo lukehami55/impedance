@@ -7,15 +7,12 @@ currently written for one lea reading
 add analog pins and digital pins for more leads
 """
 def init():
-    board = Arduino('/dev/ttyACM0')
+    board = Arduino('COM3')
     it = util.Iterator(board)
     it.start()
     board.analog[0].enable_reporting()
     board.analog[1].enable_reporting()
-    board.analog[2].enable_reporting()
     board.digital[5].write(1)
-    board.digital[6].write(1)
-    board.digital[7].write(1)
     time.sleep(3)
     print("running")
     read(board)
@@ -29,27 +26,27 @@ def read(board):
     while True:
         read1 = board.analog[0].read()
         read2 = board.analog[1].read()
-        read3 = board.analog[2].read()
-        if read1 > 0.2:
-            broke(board,read1,read2,read3,1)
+        if read1 < 0.2 and read2 < 0.2:
+            broke(read1,read2,1)
             break
-        elif read2 > 0.2:
-            broke(board,read1,read2,read3,2)
+        elif read1 < 0.2 and read2 > 0.2:
+            broke(read1,read2,2)
             break
-        elif read3 > 0.2:
-            broke(board,read1,read2,read3,3)
+        elif read1 > 0.2 and read2 < 0.2:
+            broke(read1,read2,3)
             break
         else:
             with open("output.txt", "a") as output:
-                output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "\n")
+                output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "\n")
+
 
 """
 future alert sms system 
 """
-def broke(board,read1,read2,read3,lead):
+def broke(read1,read2,lead):
     print("broken lead "+str(lead))
     with open("output.txt", "a") as output:
-        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "\n")
+        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "\n")
 
 
 if __name__ == '__main__':
