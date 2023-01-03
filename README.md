@@ -19,4 +19,4 @@ Invoke firmata.py script on the Raspberry Pi using the following:
 ```
 python firmata.py
 ```
-Lead will be constantly monitored around 3,000 times a second by analog pins and will stop if a break occurs
+Lead will be constantly monitored around 3,000 times a second by analog pins and will stop if a break occurs. All read values will be attached to output.txt within the same directory.
