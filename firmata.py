@@ -7,7 +7,7 @@ currently written for one lea reading
 add analog pins and digital pins for more leads
 """
 def init():
-    board = Arduino('COM3')
+    board = Arduino('/dev/ttyACM0')
     it = util.Iterator(board)
     it.start()
     board.analog[0].enable_reporting()
