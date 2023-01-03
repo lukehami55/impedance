@@ -1,6 +1,7 @@
 from pyfirmata import Arduino, util, INPUT
 from datetime import datetime
 from csv import writer
+import time
 
 """
 currently written for one lea reading
