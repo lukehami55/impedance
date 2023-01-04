@@ -3,7 +3,7 @@ from datetime import datetime
 import time
 
 """
-currently written for one lea reading
+currently written for three lead readings
 add analog pins and digital pins for more leads
 """
 def init():
@@ -12,41 +12,46 @@ def init():
     it.start()
     board.analog[0].enable_reporting()
     board.analog[1].enable_reporting()
+    board.analog[2].enable_reporting()
+    board.analog[3].enable_reporting()
+    board.analog[4].enable_reporting()
+    board.analog[5].enable_reporting()
     board.digital[5].write(1)
+    board.digital[6].write(1)
+    board.digital[7].write(1)
     time.sleep(3)
     print("running")
     read(board)
 
 
 """
-read1 gets first impedence reading
-read1 always goes high no matter the location
+main reading function
 """
 def read(board):
     while True:
         read1 = board.analog[0].read()
         read2 = board.analog[1].read()
+        read3 = board.analog[2].read()
+        read4 = board.analog[3].read()
+        read5 = board.analog[4].read()
+        read6 = board.analog[5].read()
         if read1 < 0.2 or read2 < 0.2:
-            broke(board)
+            broke1(board)
             break
-        if read1 < 0.2 and read2 < 0.2:
-            broke(board)
+        elif read3 < 0.2 or read4 < 0.2:
+            broke2(board)
             break
-        elif read1 < 0.2 and read2 > 0.2:
-            broke(board)
-            break
-        elif read1 > 0.2 and read2 < 0.2:
-            broke(board)
+        elif read5 < 0.2 or read6 < 0.2:
+            broke3(board)
             break
         else:
             with open("output.txt", "a") as output:
-                output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "\n")
-
+                output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
 """
-future alert sms system 
+all broke functions analyze break its location
 """
-def broke(board):
+def broke1(board):
     break1 = False
     breal2 = False
     break3 = False
@@ -65,13 +70,67 @@ def broke(board):
             break2 = False
             break3 = True
     if break1:
-        print("broken 1")
+        print("lead 1 broken 1")
     if break2:
-        print("broken 2")
+        print("lead 1 broken 2")
     if break3:
-        print("broken 3")
+        print("lead 1 broken 3")
     with open("output.txt", "a") as output:
-        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "\n")
+        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
+
+def broke2(board):
+    break1 = False
+    breal2 = False
+    break3 = False
+    for i in range(100000):
+        read1 = board.analog[0].read()
+        read2 = board.analog[1].read()
+        if read1 < 0.2 and read2 < 0.2:
+            break1 = True
+            break2 = False
+            break3 = False
+            break
+        if read1 < 0.2 and read2 > 0.2:
+            break2 = True
+            break3 = False
+        if read1 > 0.2 and read2 < 0.2:
+            break2 = False
+            break3 = True
+    if break1:
+        print("lead 2 broken 1")
+    if break2:
+        print("lead 2 broken 2")
+    if break3:
+        print("lead 2 broken 3")
+    with open("output.txt", "a") as output:
+        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
+
+def broke3(board):
+    break1 = False
+    breal2 = False
+    break3 = False
+    for i in range(100000):
+        read1 = board.analog[0].read()
+        read2 = board.analog[1].read()
+        if read1 < 0.2 and read2 < 0.2:
+            break1 = True
+            break2 = False
+            break3 = False
+            break
+        if read1 < 0.2 and read2 > 0.2:
+            break2 = True
+            break3 = False
+        if read1 > 0.2 and read2 < 0.2:
+            break2 = False
+            break3 = True
+    if break1:
+        print("lead 3 broken 1")
+    if break2:
+        print("lead 3 broken 2")
+    if break3:
+        print("lead 3 broken 3")
+    with open("output.txt", "a") as output:
+        output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
 
 if __name__ == '__main__':
