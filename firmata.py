@@ -9,11 +9,13 @@ currently written for three lead readings
 add analog pins and digital pins for more leads
 """
 def init():
-    sender = "EMAIL"
-    receiver = ["PHONE#"]
+    with open('credentials.json', 'r') as file: #read in json
+        credential = json.load(file)
+    sender = credential["sender"]
+    receiver = credential["receiver"]
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login(sender, "PASSWORD")
+    server.login(sender, credential["password"])
     board = Arduino('/dev/ttyACM0')
     it = util.Iterator(board)
     it.start()
