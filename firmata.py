@@ -1,5 +1,6 @@
 from pyfirmata import Arduino, util
 from datetime import datetime
+import smtplib
 import time
 import json
 
@@ -30,13 +31,13 @@ def init():
     board.digital[7].write(1)
     time.sleep(3)
     print("running")
-    read(board)
+    read(board,server,sender,receiver)
 
 
 """
 main reading function
 """
-def read(board):
+def read(board,server,sender,receiver):
     while True:
         read1 = board.analog[0].read()
         read2 = board.analog[1].read()
@@ -45,13 +46,13 @@ def read(board):
         read5 = board.analog[4].read()
         read6 = board.analog[5].read()
         if read1 < 0.2 or read2 < 0.2:
-            broke1(board,read1,read2,read3,read4,read5,read6)
+            broke1(board,read1,read2,read3,read4,read5,read6,server,sender,receiver)
             break
         elif read3 < 0.2 or read4 < 0.2:
-            broke2(board,read1,read2,read3,read4,read5,read6)
+            broke2(board,read1,read2,read3,read4,read5,read6,server,sender,receiver)
             break
         elif read5 < 0.2 or read6 < 0.2:
-            broke3(board,read1,read2,read3,read4,read5,read6)
+            broke3(board,read1,read2,read3,read4,read5,read6,server,sender,receiver)
             break
         else:
             with open("output.txt", "a") as output:
@@ -60,7 +61,7 @@ def read(board):
 """
 all broke functions analyze break its location
 """
-def broke1(board,read1,read2,read3,read4,read5,read6):
+def broke1(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
     breal2 = False
     break3 = False
@@ -80,14 +81,17 @@ def broke1(board,read1,read2,read3,read4,read5,read6):
             break3 = True
     if break1:
         print("lead 1 broken 1")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 1\nWire 1")
     if break2:
         print("lead 1 broken 2")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 1\nWire 2")
     if break3:
         print("lead 1 broken 3")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 1\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
-def broke2(board,read1,read2,read3,read4,read5,read6):
+def broke2(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
     breal2 = False
     break3 = False
@@ -107,14 +111,17 @@ def broke2(board,read1,read2,read3,read4,read5,read6):
             break3 = True
     if break1:
         print("lead 2 broken 1")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 2\nWire 1")
     if break2:
         print("lead 2 broken 2")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 2\nWire 2")
     if break3:
         print("lead 2 broken 3")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 2\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
-def broke3(board,read1,read2,read3,read4,read5,read6):
+def broke3(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
     breal2 = False
     break3 = False
@@ -134,10 +141,13 @@ def broke3(board,read1,read2,read3,read4,read5,read6):
             break3 = True
     if break1:
         print("lead 3 broken 1")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 3\nWire 1")
     if break2:
         print("lead 3 broken 2")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 3\nWire 2")
     if break3:
         print("lead 3 broken 3")
+        server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead 3\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
