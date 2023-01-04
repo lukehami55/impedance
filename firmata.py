@@ -28,6 +28,7 @@ def read(board):
         read2 = board.analog[1].read()
         if read1 < 0.2 or read2 < 0.2:
             broke(board)
+            break
         if read1 < 0.2 and read2 < 0.2:
             broke(board)
             break
