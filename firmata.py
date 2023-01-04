@@ -26,14 +26,16 @@ def read(board):
     while True:
         read1 = board.analog[0].read()
         read2 = board.analog[1].read()
+        if read1 < 0.2 or read2 < 0.2:
+            broke(board)
         if read1 < 0.2 and read2 < 0.2:
-            broke(read1,read2,1)
+            broke(board)
             break
         elif read1 < 0.2 and read2 > 0.2:
-            broke(read1,read2,2)
+            broke(board)
             break
         elif read1 > 0.2 and read2 < 0.2:
-            broke(read1,read2,3)
+            broke(board)
             break
         else:
             with open("output.txt", "a") as output:
@@ -43,8 +45,30 @@ def read(board):
 """
 future alert sms system 
 """
-def broke(read1,read2,lead):
-    print("broken lead "+str(lead))
+def broke(board):
+    break1 = False
+    breal2 = False
+    break3 = False
+    for i in range(100000):
+        read1 = board.analog[0].read()
+        read2 = board.analog[1].read()
+        if read1 < 0.2 and read2 < 0.2:
+            break1 = True
+            break2 = False
+            break3 = False
+            break
+        if read1 < 0.2 and read2 > 0.2:
+            break2 = True
+            break3 = False
+        if read1 > 0.2 and read2 < 0.2:
+            break2 = False
+            break3 = True
+    if break1:
+        print("broken 1")
+    if break2:
+        print("broken 2")
+    if break3:
+        print("broken 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "\n")
 
