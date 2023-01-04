@@ -83,17 +83,17 @@ def broke2(board):
     breal2 = False
     break3 = False
     for i in range(100000):
-        read1 = board.analog[0].read()
-        read2 = board.analog[1].read()
-        if read1 < 0.2 and read2 < 0.2:
+        read3 = board.analog[2].read()
+        read4 = board.analog[3].read()
+        if read3 < 0.2 and read4 < 0.2:
             break1 = True
             break2 = False
             break3 = False
             break
-        if read1 < 0.2 and read2 > 0.2:
+        if read3 < 0.2 and read4 > 0.2:
             break2 = True
             break3 = False
-        if read1 > 0.2 and read2 < 0.2:
+        if read3 > 0.2 and read4 < 0.2:
             break2 = False
             break3 = True
     if break1:
@@ -110,17 +110,17 @@ def broke3(board):
     breal2 = False
     break3 = False
     for i in range(100000):
-        read1 = board.analog[0].read()
-        read2 = board.analog[1].read()
-        if read1 < 0.2 and read2 < 0.2:
+        read5 = board.analog[4].read()
+        read6 = board.analog[5].read()
+        if read5 < 0.2 and read6 < 0.2:
             break1 = True
             break2 = False
             break3 = False
             break
-        if read1 < 0.2 and read2 > 0.2:
+        if read5 < 0.2 and read6 > 0.2:
             break2 = True
             break3 = False
-        if read1 > 0.2 and read2 < 0.2:
+        if read5 > 0.2 and read6 < 0.2:
             break2 = False
             break3 = True
     if break1:
