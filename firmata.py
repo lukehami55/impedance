@@ -36,13 +36,13 @@ def read(board):
         read5 = board.analog[4].read()
         read6 = board.analog[5].read()
         if read1 < 0.2 or read2 < 0.2:
-            broke1(board)
+            broke1(board,read1,read2,read3,read4,read5,read6)
             break
         elif read3 < 0.2 or read4 < 0.2:
-            broke2(board)
+            broke2(board,read1,read2,read3,read4,read5,read6)
             break
         elif read5 < 0.2 or read6 < 0.2:
-            broke3(board)
+            broke3(board,read1,read2,read3,read4,read5,read6)
             break
         else:
             with open("output.txt", "a") as output:
@@ -51,7 +51,7 @@ def read(board):
 """
 all broke functions analyze break its location
 """
-def broke1(board):
+def broke1(board,read1,read2,read3,read4,read5,read6):
     break1 = False
     breal2 = False
     break3 = False
@@ -78,7 +78,7 @@ def broke1(board):
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
-def broke2(board):
+def broke2(board,read1,read2,read3,read4,read5,read6):
     break1 = False
     breal2 = False
     break3 = False
@@ -105,7 +105,7 @@ def broke2(board):
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
-def broke3(board):
+def broke3(board,read1,read2,read3,read4,read5,read6):
     break1 = False
     breal2 = False
     break3 = False
