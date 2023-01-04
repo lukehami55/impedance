@@ -7,6 +7,11 @@ currently written for three lead readings
 add analog pins and digital pins for more leads
 """
 def init():
+    sender = "EMAIL"
+    receiver = ["PHONE#"]
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login(sender, "PASSWORD")
     board = Arduino('/dev/ttyACM0')
     it = util.Iterator(board)
     it.start()
