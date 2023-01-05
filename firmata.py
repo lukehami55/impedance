@@ -36,6 +36,9 @@ def init():
 
 """
 main reading function
+
+checking for any abnormalities, faster than applying entire diagnosis in this main driver function
+if abnormalities are detected, moves to broke function for further diagnosis
 """
 def read(board,server,sender,receiver):
     while True:
@@ -59,7 +62,8 @@ def read(board,server,sender,receiver):
                 output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "\n")
 
 """
-all broke functions analyze break its location
+all broke functions analyze break of which specific wire
+for loop is used to ensure power has flowed through resistors
 """
 def broke1(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
