@@ -67,7 +67,7 @@ for loop is used to ensure power has flowed through resistors
 """
 def broke1(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
-    breal2 = False
+    break2 = False
     break3 = False
     for i in range(100000):
         read1 = board.analog[0].read()
@@ -97,7 +97,7 @@ def broke1(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
 
 def broke2(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
-    breal2 = False
+    break2 = False
     break3 = False
     for i in range(100000):
         read3 = board.analog[2].read()
@@ -127,7 +127,7 @@ def broke2(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
 
 def broke3(board,read1,read2,read3,read4,read5,read6,server,sender,receiver):
     break1 = False
-    breal2 = False
+    break2 = False
     break3 = False
     for i in range(100000):
         read5 = board.analog[4].read()
