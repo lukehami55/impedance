@@ -6,7 +6,7 @@ import json
 
 
 """
-currently written for three lead readings
+currently written for six lead readings
 add analog pins and digital pins for more leads
 """
 def init():
