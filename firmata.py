@@ -130,15 +130,15 @@ def broke(board,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,r
             break3 = True
     if break1:
         print("Lead "+str(lead)+" Wire 1")
-        reportBoard.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 1"))
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 1"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 1")
     if break2:
         print("Lead "+str(lead)+" Wire 2")
-        reportBoard.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 2"))
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 2"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 2")
     if break3:
         print("Lead "+str(lead)+" Wire 3")
-        reportBoard.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 3"))
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 3"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "," + str(read7) + "," + str(read8) + "," + str(read9) + "," + str(read10) + "," + str(read11) + "," + str(read12) + "," + str(read13) + "," + str(read14) + "," + str(read15) + "," + str(read16) + "," + str(read17) + "," + str(read18) + "," + str(read19) + "," + str(read20) + "\n")
