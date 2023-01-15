@@ -1,4 +1,4 @@
-from pyfirmata import Arduino, util, INPUT, STRING_DATA
+from pyfirmata import ArduinoMega, util, INPUT, STRING_DATA
 from datetime import datetime
 import smtplib
 import time
@@ -16,7 +16,7 @@ def init():
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login(sender, credential["password"])
-    board = Arduino('/dev/ttyACM0')
+    board = ArduinoMega('/dev/ttyACM0')
     board.digital[53].mode = INPUT
     board.digital[52].mode = INPUT
     board.digital[51].mode = INPUT
@@ -73,34 +73,34 @@ def read(board,server,sender,receiver):
         read19 = board.digital[35].read()
         read20 = board.digital[34].read()
         if not read1 or not read2: #if any values are false (values are normally true)
-            broke(board,reportBoard,53,52,1,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,53,52,1,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read3 or not read4:
-            broke(board,reportBoard,51,50,2,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,51,50,2,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read5 or not read6:
-            broke(board,reportBoard,49,48,3,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,49,48,3,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read7 or not read8:
-            broke(board,reportBoard,47,46,4,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,47,46,4,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read9 or not read10:
-            broke(board,reportBoard,45,44,5,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,45,44,5,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read11 or not read12:
-            broke(board,reportBoard,43,42,6,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,43,42,6,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read13 or not read14:
-            broke(board,reportBoard,41,40,7,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,41,40,7,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read15 or not read16:
-            broke(board,reportBoard,39,38,8,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,39,38,8,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read17 or not read18:
-            broke(board,reportBoard,37,36,9,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,37,36,9,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         elif not read19 or not read20:
-            broke(board,reportBoard,35,34,10,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
+            broke(board,35,34,10,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         else:
             with open("output.txt", "a") as output:
@@ -110,7 +110,7 @@ def read(board,server,sender,receiver):
 all broke functions analyze break of which specific wire
 for loop is used to ensure power has flowed through resistors
 """
-def broke(board,reportBoard,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver):
+def broke(board,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver):
     break1 = False
     break2 = False
     break3 = False
