@@ -45,7 +45,7 @@ def init():
         if button:
             board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Request Received"))
             break
-    time.sleep(3)
+        time.sleep(.1)
     board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("\n"))
     board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Running"))
     print("running")
@@ -149,7 +149,7 @@ def broke(board,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,r
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "," + str(read7) + "," + str(read8) + "," + str(read9) + "," + str(read10) + "," + str(read11) + "," + str(read12) + "," + str(read13) + "," + str(read14) + "," + str(read15) + "," + str(read16) + "," + str(read17) + "," + str(read18) + "," + str(read19) + "," + str(read20) + "\n")
-
+    init()
 
 if __name__ == '__main__':
     init()
