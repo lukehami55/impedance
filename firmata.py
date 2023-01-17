@@ -5,10 +5,23 @@ import time
 import json
 
 
-"""
-10 lead setup
-"""
-def init():
+def button():
+    board = ArduinoMega('/dev/ttyACM1')
+    board.digital[30].mode = INPUT
+    it = util.Iterator(board)
+    it.start()
+    while True:
+        button = board.digital[30].read()
+        if button:
+            board.send_sysex(STRING_DATA, util.str_to_two_byte_iter(""))
+            board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Request Received"))
+            print("Request received")
+            init(board)
+            break
+        time.sleep(.1)
+        
+
+def init(board):
     with open('credentials.json', 'r') as file: #read in json
         credential = json.load(file)
     sender = credential["sender"]
@@ -16,7 +29,6 @@ def init():
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login(sender, credential["password"])
-    board = ArduinoMega('/dev/ttyACM1')
     board.digital[53].mode = INPUT
     board.digital[52].mode = INPUT
     board.digital[51].mode = INPUT
@@ -37,17 +49,6 @@ def init():
     board.digital[36].mode = INPUT
     board.digital[35].mode = INPUT
     board.digital[34].mode = INPUT
-    board.digital[30].mode = INPUT
-    it = util.Iterator(board)
-    it.start()
-    while True:
-        button = board.digital[30].read()
-        if button:
-            board.send_sysex(STRING_DATA, util.str_to_two_byte_iter(""))
-            board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Request Received"))
-            print("Request received")
-            break
-        time.sleep(.1)
     time.sleep(3)
     board.send_sysex(STRING_DATA, util.str_to_two_byte_iter(""))
     board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Running"))
@@ -155,7 +156,7 @@ def broke(board,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,r
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 3")
     with open("output.txt", "a") as output:
         output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "," + str(read7) + "," + str(read8) + "," + str(read9) + "," + str(read10) + "," + str(read11) + "," + str(read12) + "," + str(read13) + "," + str(read14) + "," + str(read15) + "," + str(read16) + "," + str(read17) + "," + str(read18) + "," + str(read19) + "," + str(read20) + "\n")
-    init()
+    button()
 
 if __name__ == '__main__':
-    init()
+    button()
