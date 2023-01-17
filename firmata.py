@@ -37,9 +37,16 @@ def init():
     board.digital[36].mode = INPUT
     board.digital[35].mode = INPUT
     board.digital[34].mode = INPUT
+    board.digital[20].mode = INPUT
     it = util.Iterator(board)
     it.start()
+    while True:
+        button = board.digital[20].read()
+        if button:
+            board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Request Received"))
+            break
     time.sleep(3)
+    board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("\n"))
     board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Running"))
     print("running")
     read(board,server,sender,receiver)
