@@ -16,7 +16,7 @@ def init():
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login(sender, credential["password"])
-    board = ArduinoMega('/dev/ttyACM0')
+    board = ArduinoMega('/dev/ttyACM1')
     board.digital[53].mode = INPUT
     board.digital[52].mode = INPUT
     board.digital[51].mode = INPUT
