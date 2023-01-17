@@ -4,7 +4,7 @@ A basic description of Raspberry Pi/Arduino monitoring system for lead impedance
 # LEAD DIAGRAM
 ![Flow](https://github.com/lukehami55/impedance/blob/main/leadFlow.png?raw=true)
 
-Variables in diagram are associated with variables found in firmata.py script. Diagram is for one lead, replication of variables needed to fulfill all ten leads. Ten leads need 30 analog inputs and 10 digital outputs.
+Diagram is for one lead, replication needed for multiple leads. 5V can be a common source across multiple lead circuits. No pinA and pinB duplications (example: if two leads are needed, there needs to be 4 total input pins).
 
 # GETTING STARTED
 ## Raspberry Pi
