@@ -141,14 +141,17 @@ def broke(board,pinA,pinB,lead,read1,read2,read3,read4,read5,read6,read7,read8,r
             break3 = True
     if break1:
         print("Lead "+str(lead)+" Wire 1")
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("BREAK:"))
         board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 1"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 1")
     if break2:
         print("Lead "+str(lead)+" Wire 2")
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("BREAK:"))
         board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 2"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 2")
     if break3:
         print("Lead "+str(lead)+" Wire 3")
+        board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("BREAK:"))
         board.send_sysex(STRING_DATA, util.str_to_two_byte_iter("Lead "+str(lead)+" Wire 3"))
         server.sendmail(sender, receiver, "\nLEAD BREAK:\n\nLead "+str(lead)+"\nWire 3")
     with open("output.txt", "a") as output:
