@@ -6,7 +6,7 @@ import json
 
 
 def button():
-    board = ArduinoMega('/dev/ttyACM1')
+    board = ArduinoMega('/dev/ttyACM0')
     board.digital[30].mode = INPUT
     it = util.Iterator(board)
     it.start()
