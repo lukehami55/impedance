@@ -26,6 +26,7 @@
 #include <Servo.h>
 #include <Wire.h>
 #include <Firmata.h>
+#include <LiquidCrystal.h> //ADDED
 
 #define I2C_WRITE                   B00000000
 #define I2C_READ                    B00001000
@@ -50,6 +51,9 @@
 #ifdef FIRMATA_SERIAL_FEATURE
 SerialFirmata serialFeature;
 #endif
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //ADDED
+int lastLine = 1; //ADDED
 
 /* analog inputs */
 int analogInputsToReport = 0; // bitwise array to store pin reporting
@@ -119,6 +123,17 @@ byte wireRead(void)
 /*==============================================================================
  * FUNCTIONS
  *============================================================================*/
+void stringDataCallback(char *stringData){ // ADDED
+   if ( lastLine ) {
+     lastLine = 0;
+     lcd.clear();
+   } else {
+     lastLine = 1;
+     lcd.setCursor(0,1);
+   }
+   lcd.print(stringData);
+}
+
 
 void attachServo(byte pin, int minPulse, int maxPulse)
 {
@@ -754,6 +769,7 @@ void systemResetCallback()
 
 void setup()
 {
+  lcd.begin(16,2);
   Firmata.setFirmwareVersion(FIRMATA_FIRMWARE_MAJOR_VERSION, FIRMATA_FIRMWARE_MINOR_VERSION);
 
   Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
@@ -764,6 +780,7 @@ void setup()
   Firmata.attach(SET_DIGITAL_PIN_VALUE, setPinValueCallback);
   Firmata.attach(START_SYSEX, sysexCallback);
   Firmata.attach(SYSTEM_RESET, systemResetCallback);
+  Firmata.attach( STRING_DATA, stringDataCallback);
 
   // to use a port other than Serial, such as Serial1 on an Arduino Leonardo or Mega,
   // Call begin(baud) on the alternate serial port and pass it to Firmata to begin like this:
