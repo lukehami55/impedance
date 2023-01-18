@@ -7,6 +7,18 @@ A basic description of Raspberry Pi/Arduino monitoring system for lead impedance
 Diagram is for one lead, replication needed for multiple leads. 5V can be a common source across multiple lead circuits. No pinA and pinB duplications (example: if two leads are needed, there needs to be 4 total input pins).
 
 # GETTING STARTED
+## Parts List (up to 10 leads)
+- ~~[Raspberry Pi](https://www.amazon.com/dp/B07TC2BK1X)~~ **Currently Own**
+- ~~[Micro SD Card](https://www.amazon.com/dp/B0B7NV73PJ)~~ **Currently Own**
+- ~~[Board Casing](https://www.amazon.com/dp/B08PZCC562)~~ **Currently Own**
+- [Arduino Mega](https://www.amazon.com/dp/B0046AMGW0)
+- [USB A Cable](https://www.amazon.com/dp/B000067RMY)
+- [16X2 LCD Screen](https://www.amazon.com/dp/B0177XQE7K)
+- [Alligator Clips](https://www.amazon.com/dp/B08R5R7G5D)
+- [Resistors](https://www.amazon.com/dp/B08FD1XVL6)
+- [Bread Boards](https://www.amazon.com/dp/B09NS36955)
+- [Male to Male Wires](https://www.amazon.com/dp/B09FP517VM])
+
 ## Raspberry Pi
 - git clone repository
 ```
