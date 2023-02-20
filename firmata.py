@@ -115,8 +115,8 @@ def read(board,server,sender,receiver,runTime):
             broke(board,35,34,10,read1,read2,read3,read4,read5,read6,read7,read8,read9,read10,read11,read12,read13,read14,read15,read16,read17,read18,read19,read20,server,sender,receiver)
             break
         else:
-            if runTime - time.time() > 0.025:
-                runtTime = time.time()
+            if time.time() - runTime > 0.025:
+                runTime = time.time()
                 with open("output.txt", "a") as output:
                     output.write(str(datetime.now()) + "," + str(read1) + "," + str(read2) + "," + str(read3) + "," + str(read4) + "," + str(read5) + "," + str(read6) + "," + str(read7) + "," + str(read8) + "," + str(read9) + "," + str(read10) + "," + str(read11) + "," + str(read12) + "," + str(read13) + "," + str(read14) + "," + str(read15) + "," + str(read16) + "," + str(read17) + "," + str(read18) + "," + str(read19) + "," + str(read20) + "\n")
             else:
